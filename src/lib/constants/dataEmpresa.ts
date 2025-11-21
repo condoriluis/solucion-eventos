@@ -20,7 +20,7 @@ export const dataEmpresa = {
   redes: [
     {
       network: 'Facebook',
-      url: 'https://www.facebook.com/profile.php?id=61584137694359',
+      url: 'https://www.facebook.com/774327219108632',
       name: 'Soluciones para eventos',
     },
     {
