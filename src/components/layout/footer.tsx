@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { dataEmpresa } from "@/lib/constants/dataEmpresa";
 import { iconsWeb } from "./iconsWeb";
+import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const redes = dataEmpresa.redes.map((r) => {
@@ -27,31 +28,30 @@ export default function Footer() {
   });
 
   return (
-    <footer className="border-t border-border bg-background mt-14 transition-colors">
-      <div className="max-w-6xl mx-auto px-4 py-14 grid gap-10 md:grid-cols-3">
+    <footer className="bg-muted/30 border-t pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 grid gap-12 md:grid-cols-2 lg:grid-cols-4 mb-12">
 
-        <div>
-          <p className="text-xl font-semibold tracking-tight">
-            {dataEmpresa.basics.name}
-          </p>
-
-          <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+        {/* Col 1: Brand */}
+        <div className="space-y-4">
+          <Link href="/" className="block w-fit">
+            <img
+              src={dataEmpresa.basics.logoWeb}
+              alt={dataEmpresa.basics.name}
+              className="h-12 w-auto object-contain"
+            />
+          </Link>
+          <p className="text-muted-foreground leading-relaxed text-sm">
             {dataEmpresa.basics.description}
           </p>
-
-          <div className="flex gap-4 mt-5">
+          <div className="flex gap-3 pt-2">
             {redes.map((r) => (
               <a
                 key={r.network}
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="
-                  w-10 h-10 flex items-center justify-center rounded-full border border-border
-                  hover:bg-primary hover:text-primary-foreground
-                  dark:hover:bg-primary dark:hover:text-primary-foreground
-                  transition-colors shadow-sm
-                "
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-background border hover:border-primary hover:text-primary transition-colors"
+                aria-label={r.network}
               >
                 {r.icon}
               </a>
@@ -59,33 +59,78 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Col 2: Links */}
         <div>
-          <p className="font-semibold mb-3 text-lg">Contacto</p>
-          <ul className="text-sm space-y-1 text-muted-foreground">
+          <h3 className="font-semibold text-foreground mb-6">Navegación</h3>
+          <ul className="space-y-3 text-sm text-muted-foreground">
             <li>
-              <span className="font-medium text-foreground">Teléfono:</span> {dataEmpresa.contact.phone}
+              <Link href="/" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                Inicio
+              </Link>
             </li>
-
             <li>
-              <span className="font-medium text-foreground">Email:</span> {dataEmpresa.contact.email}
+              <Link href="/productos" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                Productos
+              </Link>
+            </li>
+            <li>
+              <Link href="/cotizacion" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                Cotización
+              </Link>
+            </li>
+            <li>
+              <Link href="/sobre-nosotros" className="hover:text-primary transition-colors flex items-center gap-2 group">
+                <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                Sobre Nosotros
+              </Link>
             </li>
           </ul>
         </div>
 
+        {/* Col 3: Contact */}
         <div>
-          <p className="font-semibold mb-3 text-lg">Enlaces</p>
-          <ul className="text-sm space-y-2 text-muted-foreground">
-            <li><Link href="/productos" className="hover:text-primary transition-colors">Productos</Link></li>
-            <li><Link href="/cotizacion" className="hover:text-primary transition-colors">Cotización</Link></li>
-            <li><Link href="/sobre-nosotros" className="hover:text-primary transition-colors">Sobre Nosotros</Link></li>
-            <li><Link href="/contacto" className="hover:text-primary transition-colors">Contacto</Link></li>
+          <h3 className="font-semibold text-foreground mb-6">Contacto</h3>
+          <ul className="space-y-4 text-sm text-muted-foreground">
+            <li className="flex items-start gap-3">
+              <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <span>{dataEmpresa.location.address}</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone className="w-5 h-5 text-primary shrink-0" />
+              <span>{dataEmpresa.contact.phone}</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Mail className="w-5 h-5 text-primary shrink-0" />
+              <span>{dataEmpresa.contact.email}</span>
+            </li>
           </ul>
+        </div>
+
+        {/* Col 4: Legal / Extra */}
+        <div>
+          <h3 className="font-semibold text-foreground mb-6">Horario de Atención</h3>
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>Lunes a Viernes</p>
+            <p className="font-medium text-foreground">9:00 AM - 6:00 PM</p>
+            <div className="h-px bg-border w-full my-3" />
+            <p>Sábados</p>
+            <p className="font-medium text-foreground">9:00 AM - 1:00 PM</p>
+          </div>
         </div>
 
       </div>
 
-      <div className="text-center text-xs text-muted-foreground pb-8">
-        © {new Date().getFullYear()} {dataEmpresa.basics.name}. Todos los derechos reservados.
+      <div className="border-t border-border/50">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+          <p>© {new Date().getFullYear()} {dataEmpresa.basics.name}. Todos los derechos reservados.</p>
+          <div className="flex gap-6">
+            <Link href="#" className="hover:text-foreground transition-colors">Términos y Condiciones</Link>
+            <Link href="#" className="hover:text-foreground transition-colors">Política de Privacidad</Link>
+          </div>
+        </div>
       </div>
     </footer>
   );

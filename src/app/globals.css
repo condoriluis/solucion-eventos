@@ -119,3 +119,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes scroll-slow {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .animate-scroll-slow {
+    animation: scroll-slow 40s linear infinite;
+  }
+}
