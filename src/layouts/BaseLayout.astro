@@ -1,0 +1,100 @@
+---
+import "@/styles/globals.css";
+import SEO from "@/components/seo/SEO.astro";
+import GoogleTagManager from "@/components/seo/GoogleTagManager.astro";
+import GoogleAnalytics from "@/components/seo/GoogleAnalytics.astro";
+import FacebookPixel from "@/components/seo/FacebookPixel.astro";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import { dataEmpresa } from "@/lib/constants/dataEmpresa";
+import { ViewTransitions } from "astro:transitions";
+import { Toaster } from "@/components/ui/sonner";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  keywords?: string[];
+  structuredData?: object;
+}
+
+const {
+  title = dataEmpresa.basics.name,
+  description = dataEmpresa.basics.description,
+  image,
+  keywords = ["eventos", "alquileres", "carpas", "mesas", "sillas", "manteles"],
+  structuredData,
+} = Astro.props;
+
+const fullTitle =
+  title === dataEmpresa.basics.name
+    ? title
+    : `${title} | ${dataEmpresa.basics.name}`;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+
+    <SEO
+      title={fullTitle}
+      description={description}
+      image={image}
+      keywords={keywords}
+      structuredData={structuredData}
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <GoogleTagManager />
+    <GoogleAnalytics />
+    <FacebookPixel />
+
+    <ViewTransitions />
+
+    <script is:inline>
+      (function () {
+        const theme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
+    <script>
+      document.addEventListener("astro:after-swap", () => {
+        const theme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      });
+    </script>
+  </head>
+  <body class="antialiased">
+    <GoogleTagManager />
+    <Header client:load />
+    <Toaster client:load transition:persist />
+    <slot />
+    <Footer />
+  </body>
+</html>

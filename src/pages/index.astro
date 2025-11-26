@@ -1,0 +1,55 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeClient from "@/components/pages/HomeClient";
+import { dataEmpresa } from "@/lib/constants/dataEmpresa";
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: dataEmpresa.basics.name,
+    description: dataEmpresa.basics.description,
+    image: dataEmpresa.basics.logoWeb,
+    address: {
+        "@type": "PostalAddress",
+        addressLocality: dataEmpresa.location.city,
+        addressRegion: dataEmpresa.location.region,
+        addressCountry: dataEmpresa.location.countryCode,
+    },
+    telephone: dataEmpresa.contact.phone,
+    email: dataEmpresa.contact.email,
+    url: `https://${dataEmpresa.contact.url}`,
+    priceRange: "$$",
+    openingHoursSpecification: [
+        {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "08:00",
+            closes: "18:00",
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: "Saturday",
+            opens: "08:00",
+            closes: "15:00",
+        },
+    ],
+};
+---
+
+<BaseLayout
+    title={dataEmpresa.basics.name}
+    description={dataEmpresa.basics.description}
+    keywords={[
+        "eventos",
+        "alquileres",
+        "carpas",
+        "mesas",
+        "sillas",
+        "manteles",
+        "Bolivia",
+        "La Paz",
+    ]}
+    structuredData={structuredData}
+>
+    <HomeClient client:load />
+</BaseLayout>

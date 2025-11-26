@@ -1,78 +1,220 @@
-# Soluciones para Eventos - Carpas y Más
+# Soluciones para Eventos - Astro Migration
 
-**Descripción**
+Migración de la aplicación de Next.js a Astro para mejor SEO y rendimiento.
 
-- **Proyecto**: Sitio web de catálogo y cotizaciones para alquiler de material para eventos (carpas, mesas, sillas, mantelería, sonido, etc.).
-- **Objetivo**: Permitir ver productos, solicitar cotizaciones y generar una propuesta en PDF lista para enviar al cliente.
+## 🚀 Características
 
-**Tecnologías principales**
+- ✅ **Astro 5** con React Islands para componentes interactivos
+- ✅ **SEO Optimizado** con meta tags, Open Graph, y structured data
+- ✅ **Marketing Tools** integrados:
+  - Google Tag Manager
+  - Google Analytics 4
+  - Facebook Pixel
+- ✅ **Tailwind CSS** con tema dark/light
+- ✅ **Framer Motion** para animaciones
+- ✅ **Generación de PDF** con @react-pdf/renderer
+- ✅ **Sitemap** automático
+- ✅ **Diseño Responsive** y moderno
 
-- **Framework**: `Next.js` 16 (app router).
-- **UI**: React 19, Tailwind CSS v4, componentes Radix y librerías auxiliares (`framer-motion`, `lucide-react`).
-- **PDF**: `@react-pdf/renderer` para generar cotizaciones en PDF.
-- **Temas**: `next-themes` para modo claro/oscuro.
+## 📋 Requisitos Previos
 
-**Características**
+- Node.js 18+ 
+- npm o pnpm
 
-- **Catálogo de productos**: listado y páginas por producto en `src/app/productos` y `src/data/products.ts`.
-- **Cotizaciones**: formulario para armar una cotización y generar/descargar un PDF (`src/components/quote/QuotePDF.tsx`).
-- **Generación de PDF**: plantilla corporativa basada en `src/lib/constants/dataEmpresa.ts`.
-- **Componentes reutilizables**: encabezado, footer, galería, tarjetas, sistema de notificaciones y controles UI en `src/components`.
-- **Responsive**: diseño adaptado para móvil y escritorio.
+## 🛠️ Instalación
 
-**Requisitos**
-
-- Node.js (recomendada: 18+). Si usas nvm, selecciona una versión LTS moderna.
-
-**Instalación y uso (PowerShell)**
-
-```powershell
+```bash
 # Instalar dependencias
-npm install
+npm install --legacy-peer-deps
 
-# Ejecutar en modo desarrollo
-npm run dev
-
-# Construir para producción
-npm run build
-
-# Iniciar servidor (después de build)
-npm start
-
-# Ejecutar linter
-npm run lint
+# o con pnpm
+pnpm install
 ```
 
-El servidor de desarrollo arrancará por defecto en `http://localhost:3000`.
+## ⚙️ Configuración
 
-**Estructura relevante del proyecto**
+### Variables de Entorno
 
-- **`src/app/`**: Rutas y páginas (inicio, `productos`, `cotizacion`, `contacto`, `sobre-nosotros`).
-- **`src/components/`**: Componentes UI por dominio (layout, producto, quote, ui).
-- **`src/data/`**: Datos estáticos de ejemplo: `products.ts`, `testimonials.ts`.
-- **`src/lib/constants/dataEmpresa.ts`**: Datos de la empresa usados en PDFs y cabecera (logo, contacto, redes).
-- **`src/components/quote/QuotePDF.tsx`**: Plantilla de documento PDF y estilos en `src/components/quote/styles/pdfStyles.ts`.
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
-**Cómo personalizar**
+```env
+PUBLIC_GTM_ID=GTM-XXXXXXX
+PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+PUBLIC_FACEBOOK_PIXEL_ID=your-pixel-id-here
+PUBLIC_FACEBOOK_VERIFICATION_DOMAIN=your-verification-domain-here
+PUBLIC_SITE_URL=https://solucion-eventos.vercel.app
+```
 
-- **Cambiar datos de la empresa**: editar `src/lib/constants/dataEmpresa.ts` (logoWeb, logoPdf, email, teléfono, redes).
-- **Agregar/editar productos**: editar `src/data/products.ts` para actualizar el catálogo (id, slug, price, stock, images).
-- **Modificar plantilla PDF**: `src/components/quote/QuotePDF.tsx` y `src/components/quote/styles/pdfStyles.ts`.
+> **Nota**: Todas las variables que necesitan ser accesibles en el navegador deben tener el prefijo `PUBLIC_`.
 
-**Scripts útiles (de `package.json`)**
+## 🚀 Desarrollo
 
-- `dev`: ejecuta `next dev` (desarrollo).
-- `build`: ejecuta `next build` (compilación para producción).
-- `start`: ejecuta `next start` (iniciar servidor tras build).
-- `lint`: ejecuta `eslint`.
+```bash
+# Iniciar servidor de desarrollo
+npm run dev
 
-**Despliegue**
+# El sitio estará disponible en http://localhost:4321
+```
 
-- Recomendado: Vercel (soporta Next.js nativamente). Sube el repositorio y configura la variable `NEXT_PUBLIC_*` si añades variables públicas.
-- Alternativas: Netlify, Azure Static Web Apps o contenedores Docker si necesitas control total.
+## 🏗️ Build
 
-**Notas y consideraciones**
+```bash
+# Generar build de producción
+npm run build
 
-- El proyecto usa `@react-pdf/renderer` para generar PDFs del lado del servidor/cliente. Asegúrate de probar la generación en el entorno de despliegue.
-- Revisa las rutas y permisos de imágenes externas (Cloudinary y otros CDN usados en `src/data` y `src/lib/constants`).
-- `next/image` no se usa ampliamente en el código visible; si lo integras, configura `next.config.js` para dominios externos.
+# Vista previa del build
+npm run preview
+```
+
+## 📁 Estructura del Proyecto
+
+```
+astro-migration/
+├── public/
+│   ├── favicon.ico
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   │   ├── layout/          # Header, Footer, ThemeToggle
+│   │   ├── pages/           # Componentes React para páginas
+│   │   ├── seo/             # SEO y marketing tools
+│   │   └── ui/              # Componentes UI (shadcn/ui)
+│   ├── data/                # Datos estáticos
+│   ├── layouts/             # Layouts de Astro
+│   ├── lib/                 # Utilidades y constantes
+│   ├── pages/               # Páginas de Astro (rutas)
+│   └── styles/              # Estilos globales
+├── astro.config.mjs         # Configuración de Astro
+├── tailwind.config.mjs      # Configuración de Tailwind
+└── tsconfig.json            # Configuración de TypeScript
+```
+
+## 🎨 Componentes
+
+### Componentes Astro (.astro)
+- Usados para contenido estático y SEO
+- Renderizados en el servidor
+- Ejemplos: SEO, GoogleTagManager, BaseLayout
+
+### Componentes React (.tsx)
+- Usados para interactividad
+- Cargados como "islands" con `client:load`
+- Ejemplos: Header, Footer, HomeClient
+
+## 📊 SEO y Marketing
+
+### Google Tag Manager
+Configurado en `src/components/seo/GoogleTagManager.astro`
+
+### Google Analytics 4
+Configurado en `src/components/seo/GoogleAnalytics.astro`
+
+### Facebook Pixel
+Configurado en `src/components/seo/FacebookPixel.astro`
+
+### Structured Data
+Cada página incluye JSON-LD para mejor SEO
+
+## 🎯 Verificación
+
+### Herramientas Recomendadas
+
+1. **Google Tag Assistant** - Verificar GTM y GA4
+2. **Facebook Pixel Helper** - Verificar Facebook Pixel
+3. **Lighthouse** - Auditoría de performance y SEO
+4. **Chrome DevTools** - Network tab para verificar scripts
+
+### Checklist de Verificación
+
+- [ ] GTM se carga correctamente
+- [ ] GA4 envía eventos de pageview
+- [ ] Facebook Pixel se inicializa
+- [ ] Meta tags están presentes
+- [ ] Sitemap se genera en `/sitemap-index.xml`
+- [ ] Robots.txt es accesible
+- [ ] Tema dark/light funciona
+- [ ] Navegación móvil funciona
+- [ ] Formularios funcionan
+- [ ] PDF se genera correctamente
+
+## 🚢 Deployment
+
+### Vercel (Recomendado)
+
+1. Conecta tu repositorio a Vercel
+2. Configura las variables de entorno en Vercel
+3. Deploy automático en cada push
+
+### Otras Plataformas
+
+Astro es compatible con:
+- Netlify
+- Cloudflare Pages
+- AWS Amplify
+- GitHub Pages
+
+## 📝 Notas Importantes
+
+1. **Tailwind CSS v3**: Usamos Tailwind v3 para mejor compatibilidad
+2. **React 18**: Compatible con todas las dependencias
+3. **Framer Motion**: Versión 11 para compatibilidad con React 18
+4. **Legacy Peer Deps**: Necesario para resolver conflictos de dependencias
+
+## 🔄 Migración desde Next.js
+
+### Diferencias Principales
+
+| Next.js | Astro |
+|---------|-------|
+| `pages/` | `src/pages/` |
+| `_app.tsx` | `src/layouts/BaseLayout.astro` |
+| `useEffect` en componentes | `client:load` directive |
+| API Routes | `src/pages/api/` (similar) |
+| Image component | `<img>` nativo o `@astrojs/image` |
+
+### Componentes Interactivos
+
+En Astro, los componentes React necesitan la directiva `client:*`:
+
+```astro
+<Header client:load />  <!-- Carga inmediatamente -->
+<Footer client:idle />  <!-- Carga cuando el navegador está idle -->
+<Modal client:visible /> <!-- Carga cuando es visible -->
+```
+
+## 🆘 Troubleshooting
+
+### Error: Cannot find module '@/...'
+
+Asegúrate de que `tsconfig.json` tiene configurado el path alias:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+### Error: Dependency conflicts
+
+Usa `--legacy-peer-deps`:
+
+```bash
+npm install --legacy-peer-deps
+```
+
+### Tailwind no aplica estilos
+
+Verifica que `globals.css` esté importado en `BaseLayout.astro`
+
+## 📞 Soporte
+
+Para preguntas o problemas, contacta al equipo de desarrollo.
+
+---
+
+**Desarrollado con ❤️ usando Astro**

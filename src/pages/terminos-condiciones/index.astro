@@ -1,0 +1,291 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { dataEmpresa } from "@/lib/constants/dataEmpresa";
+---
+
+<BaseLayout
+    title="Términos y Condiciones"
+    description="Términos y condiciones de uso de los servicios de alquiler de equipos para eventos."
+>
+    <main class="min-h-screen bg-gradient-to-b from-background to-muted/20">
+        <div class="max-w-4xl mx-auto px-4 py-16 md:py-24">
+            {/* Header */}
+            <div class="text-center mb-12">
+                <h1
+                    class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent"
+                >
+                    Términos y Condiciones
+                </h1>
+                <p class="text-muted-foreground text-lg">
+                    Última actualización: {
+                        new Date().toLocaleDateString("es-BO", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        })
+                    }
+                </p>
+            </div>
+
+            {/* Content */}
+            <div
+                class="bg-card rounded-2xl shadow-lg border p-8 md:p-12 space-y-8"
+            >
+                {/* Introduction */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        1. Introducción
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed">
+                        Bienvenido a <span class="font-semibold text-foreground"
+                            >{dataEmpresa.basics.name}</span
+                        >. Al utilizar nuestros servicios de alquiler de equipos
+                        para eventos, usted acepta estos términos y condiciones
+                        en su totalidad. Si no está de acuerdo con alguna parte
+                        de estos términos, le rogamos que no utilice nuestros
+                        servicios.
+                    </p>
+                </section>
+
+                {/* Service Terms */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        2. Servicios Ofrecidos
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed mb-3">
+                        {dataEmpresa.basics.name} ofrece servicios de alquiler de
+                        equipos y mobiliario para eventos, incluyendo pero no limitado
+                        a: carpas, mesas, sillas, manteles, vajilla, y otros accesorios
+                        relacionados.
+                    </p>
+                    <ul
+                        class="list-disc list-inside space-y-2 text-muted-foreground ml-4"
+                    >
+                        <li>
+                            Los equipos se alquilan por períodos específicos
+                            acordados al momento de la reserva.
+                        </li>
+                        <li>
+                            La disponibilidad está sujeta a confirmación y puede
+                            variar según la temporada.
+                        </li>
+                        <li>
+                            Nos reservamos el derecho de modificar nuestro
+                            inventario sin previo aviso.
+                        </li>
+                    </ul>
+                </section>
+
+                {/* Reservations & Payments */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        3. Reservas y Pagos
+                    </h2>
+                    <div class="space-y-3 text-muted-foreground">
+                        <p class="leading-relaxed">
+                            <span class="font-semibold text-foreground"
+                                >3.1 Anticipo:</span
+                            > Se requiere un anticipo del 50% del valor total para
+                            confirmar la reserva de fecha y equipos. Este anticipo
+                            no es reembolsable excepto en casos de cancelación con
+                            más de 48 horas de anticipación.
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="font-semibold text-foreground"
+                                >3.2 Pago Final:</span
+                            > El saldo restante debe ser cancelado antes o al momento
+                            de la entrega de los equipos.
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="font-semibold text-foreground"
+                                >3.3 Métodos de Pago:</span
+                            > Aceptamos transferencias bancarias, depósitos en efectivo,
+                            y otros métodos acordados previamente.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Responsibilities */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        4. Responsabilidades del Cliente
+                    </h2>
+                    <ul
+                        class="list-disc list-inside space-y-2 text-muted-foreground ml-4"
+                    >
+                        <li>
+                            El cliente es responsable del cuidado y buen uso de
+                            los equipos durante el período de alquiler.
+                        </li>
+                        <li>
+                            Cualquier daño, pérdida o robo de los equipos será
+                            responsabilidad del cliente y deberá ser compensado
+                            según el valor comercial del equipo.
+                        </li>
+                        <li>
+                            Los equipos deben ser devueltos en las mismas
+                            condiciones en que fueron entregados, limpios y
+                            completos.
+                        </li>
+                        <li>
+                            El cliente debe proporcionar un espacio adecuado y
+                            seguro para la instalación de los equipos cuando
+                            aplique.
+                        </li>
+                    </ul>
+                </section>
+
+                {/* Cancellations */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        5. Cancelaciones y Modificaciones
+                    </h2>
+                    <div class="space-y-3 text-muted-foreground">
+                        <p class="leading-relaxed">
+                            <span class="font-semibold text-foreground"
+                                >5.1 Cancelación por el Cliente:</span
+                            > Las cancelaciones deben realizarse con al menos 48
+                            horas de anticipación para tener derecho a reembolso
+                            del anticipo. Cancelaciones con menos de 48 horas no
+                            tendrán derecho a reembolso.
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="font-semibold text-foreground"
+                                >5.2 Modificaciones:</span
+                            > Las modificaciones a la reserva están sujetas a disponibilidad
+                            y deben ser solicitadas con al menos 24 horas de anticipación.
+                        </p>
+                        <p class="leading-relaxed">
+                            <span class="font-semibold text-foreground"
+                                >5.3 Cancelación por Nuestra Parte:</span
+                            > Nos reservamos el derecho de cancelar una reserva en
+                            casos de fuerza mayor, con reembolso total del anticipo.
+                        </p>
+                    </div>
+                </section>
+
+                {/* Delivery & Pickup */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        6. Entrega y Recojo
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed mb-3">
+                        Ofrecemos servicio de transporte con costo adicional, el
+                        cual varía según la cantidad de equipos y la ubicación
+                        de entrega.
+                    </p>
+                    <ul
+                        class="list-disc list-inside space-y-2 text-muted-foreground ml-4"
+                    >
+                        <li>
+                            Los horarios de entrega y recojo deben ser
+                            coordinados previamente.
+                        </li>
+                        <li>
+                            El cliente debe asegurar el acceso adecuado al lugar
+                            de entrega.
+                        </li>
+                        <li>
+                            Retrasos en la devolución pueden generar cargos
+                            adicionales.
+                        </li>
+                    </ul>
+                </section>
+
+                {/* Liability */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        7. Limitación de Responsabilidad
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed">
+                        {dataEmpresa.basics.name} no se hace responsable por daños
+                        indirectos, incidentales o consecuentes que puedan surgir
+                        del uso de nuestros equipos. Nuestra responsabilidad se limita
+                        al valor del alquiler pagado por el cliente.
+                    </p>
+                </section>
+
+                {/* Modifications */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        8. Modificaciones a los Términos
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed">
+                        Nos reservamos el derecho de modificar estos términos y
+                        condiciones en cualquier momento. Los cambios serán
+                        efectivos inmediatamente después de su publicación en
+                        nuestro sitio web. Es responsabilidad del cliente
+                        revisar periódicamente estos términos.
+                    </p>
+                </section>
+
+                {/* Applicable Law */}
+                <section>
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        9. Ley Aplicable
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed">
+                        Estos términos y condiciones se rigen por las leyes de
+                        Bolivia. Cualquier disputa será resuelta en los
+                        tribunales competentes de La Paz, Bolivia.
+                    </p>
+                </section>
+
+                {/* Contact */}
+                <section class="pt-6 border-t">
+                    <h2 class="text-2xl font-semibold mb-4 text-foreground">
+                        10. Contacto
+                    </h2>
+                    <p class="text-muted-foreground leading-relaxed mb-4">
+                        Si tiene preguntas sobre estos términos y condiciones,
+                        puede contactarnos:
+                    </p>
+                    <div class="bg-muted/50 rounded-lg p-6 space-y-2 text-sm">
+                        <p>
+                            <span class="font-semibold text-foreground"
+                                >Email:</span
+                            >
+                            {dataEmpresa.contact.email}
+                        </p>
+                        <p>
+                            <span class="font-semibold text-foreground"
+                                >Teléfono:</span
+                            >
+                            {dataEmpresa.contact.phone}
+                        </p>
+                        <p>
+                            <span class="font-semibold text-foreground"
+                                >Dirección:</span
+                            >
+                            {dataEmpresa.location.address}
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            {/* Back Button */}
+            <div class="text-center mt-12">
+                <a
+                    href="/"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-medium"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="m12 19-7-7 7-7"></path>
+                        <path d="M19 12H5"></path>
+                    </svg>
+                    Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </main>
+</BaseLayout>

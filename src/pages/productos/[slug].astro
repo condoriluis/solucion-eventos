@@ -1,0 +1,326 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { products } from "@/data/products";
+import ProductGallery from "@/components/products/ProductGallery";
+
+export function getStaticPaths() {
+    return products.map((product) => ({
+        params: { slug: product.slug },
+        props: { product },
+    }));
+}
+
+const { product } = Astro.props;
+
+// Find related products (same category, excluding current)
+const relatedProducts = products
+    .filter(
+        (x) =>
+            x.category === product.category &&
+            x.id !== product.id &&
+            x.stock > 0,
+    )
+    .slice(0, 4);
+---
+
+<BaseLayout
+    title={product.name}
+    description={product.description}
+    keywords={[product.category, product.name, "alquiler", "eventos"]}
+>
+    <div class="min-h-screen bg-background pb-20">
+        <!-- Breadcrumbs -->
+        <div class="bg-muted/30 border-b">
+            <div
+                class="max-w-7xl mx-auto px-4 py-4 flex items-center text-sm text-muted-foreground"
+            >
+                <a
+                    href="/"
+                    class="hover:text-primary flex items-center gap-1 transition-colors"
+                >
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                        ></path>
+                    </svg>
+                    Inicio
+                </a>
+                <svg
+                    class="w-4 h-4 mx-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"></path>
+                </svg>
+                <a
+                    href="/productos"
+                    class="hover:text-primary transition-colors"
+                >
+                    Productos
+                </a>
+                <svg
+                    class="w-4 h-4 mx-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"></path>
+                </svg>
+                <span class="text-foreground font-medium truncate max-w-[200px]"
+                    >{product.name}</span
+                >
+            </div>
+        </div>
+
+        <main class="max-w-7xl mx-auto px-4 py-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+                <!-- Left Column: Gallery -->
+                <div class="space-y-4">
+                    <ProductGallery
+                        client:load
+                        images={product.images}
+                        productName={product.name}
+                    />
+
+                    <!-- Trust Badges -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t">
+                        <div
+                            class="flex flex-col items-center text-center gap-2"
+                        >
+                            <div
+                                class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium"
+                                >Garantía de Calidad</span
+                            >
+                        </div>
+                        <div
+                            class="flex flex-col items-center text-center gap-2"
+                        >
+                            <div
+                                class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium"
+                                >Entrega Segura</span
+                            >
+                        </div>
+                        <div
+                            class="flex flex-col items-center text-center gap-2"
+                        >
+                            <div
+                                class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                                    ></path>
+                                </svg>
+                            </div>
+                            <span class="text-xs font-medium"
+                                >Pago Flexible</span
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Details -->
+                <div class="flex flex-col">
+                    <div class="mb-6">
+                        <span
+                            class="inline-block mb-4 text-sm px-3 py-1 capitalize bg-secondary text-secondary-foreground rounded-md"
+                        >
+                            {product.category}
+                        </span>
+                        <h1
+                            class="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight"
+                        >
+                            {product.name}
+                        </h1>
+                        <div class="flex items-baseline gap-2 mb-6">
+                            <span class="text-3xl font-bold text-primary"
+                                >Bs. {product.price}</span
+                            >
+                            <span class="text-muted-foreground">/ día</span>
+                        </div>
+                        <p
+                            class="text-lg text-muted-foreground leading-relaxed"
+                        >
+                            {product.description}
+                        </p>
+                    </div>
+
+                    <div class="space-y-6 mb-8">
+                        <h3 class="font-semibold text-foreground">
+                            Características:
+                        </h3>
+                        <ul class="grid sm:grid-cols-2 gap-3">
+                            {
+                                product.features?.map((f) => (
+                                    <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                                        <svg
+                                            class="w-4 h-4 text-primary mt-0.5 shrink-0"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M5 13l4 4L19 7"
+                                            />
+                                        </svg>
+                                        <span>{f}</span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
+
+                    <div
+                        class="mt-auto space-y-4 p-6 bg-muted/30 rounded-2xl border"
+                    >
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-muted-foreground"
+                                >Disponibilidad:</span
+                            >
+                            <span
+                                class="font-medium text-green-600 flex items-center gap-1"
+                            >
+                                <div class="w-2 h-2 rounded-full bg-green-600">
+                                </div>
+                                {product.stock} unidades disponibles
+                            </span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                            <a
+                                href="/cotizacion"
+                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-12 px-8 flex-1 text-lg"
+                            >
+                                Solicitar Cotización
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products Section -->
+            {
+                relatedProducts.length > 0 && (
+                    <div class="mt-24 border-t pt-16">
+                        <div class="flex items-center justify-between mb-8">
+                            <h2 class="text-2xl font-bold">
+                                Productos Relacionados
+                            </h2>
+                            <a
+                                href="/productos"
+                                class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                Ver todos
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 5l7 7-7 7"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {relatedProducts.map((rp) => (
+                                <a
+                                    href={`/productos/${rp.slug}`}
+                                    class="group rounded-2xl overflow-hidden border bg-card hover:shadow-lg transition-all"
+                                >
+                                    <div class="aspect-video overflow-hidden">
+                                        <img
+                                            src={rp.images[0]}
+                                            alt={rp.name}
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                        />
+                                    </div>
+                                    <div class="p-4">
+                                        <h3 class="font-bold mb-1 line-clamp-1">
+                                            {rp.name}
+                                        </h3>
+                                        <p class="text-sm text-muted-foreground mb-2 line-clamp-2">
+                                            {rp.description}
+                                        </p>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-lg font-bold text-primary">
+                                                Bs. {rp.price}
+                                            </span>
+                                            <span class="text-xs text-muted-foreground">
+                                                Stock: {rp.stock}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
+        </main>
+    </div>
+</BaseLayout>

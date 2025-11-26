@@ -1,0 +1,11 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import QuotePage from "@/components/cotizacion/QuotePage";
+---
+
+<BaseLayout
+    title="Solicitar Cotización"
+    description="Solicita una cotización personalizada para tu evento. Te responderemos a la brevedad."
+>
+    <QuotePage client:only="react" />
+</BaseLayout>

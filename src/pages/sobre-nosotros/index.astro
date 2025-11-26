@@ -1,0 +1,222 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Team from "@/components/about/Team";
+
+const teamMembers = [
+    {
+        n: "Luis Alberto",
+        r: "Operaciones & Sistemas",
+        img: "https://res.cloudinary.com/dpyrrgou3/image/upload/v1763596633/b081c6780b3725_v3vmfs.png",
+    },
+    {
+        n: "Efraín Franz",
+        r: "Montaje & Análisis",
+        img: "https://res.cloudinary.com/dpyrrgou3/image/upload/v1763596633/b081c6780b3725_v3vmfs.png",
+    },
+    {
+        n: "Equipo Logístico",
+        r: "Ejecución y Transporte",
+        img: "https://res.cloudinary.com/dpyrrgou3/image/upload/v1763596633/b081c6780b3725_v3vmfs.png",
+    },
+];
+
+const features = [
+    {
+        t: "Misión",
+        d: "Brindar soluciones de alquiler y montaje confiables y elegantes, superando las expectativas de nuestros clientes en cada evento.",
+        icon: "target",
+    },
+    {
+        t: "Visión",
+        d: "Ser la empresa referente en calidad y servicio en la industria de eventos a nivel nacional, innovando constantemente.",
+        icon: "eye",
+    },
+    {
+        t: "Valores",
+        d: "Compromiso inquebrantable, honestidad transparente, búsqueda de la excelencia y cercanía con cada cliente.",
+        icon: "heart",
+    },
+];
+---
+
+<BaseLayout
+    title="Sobre Nosotros"
+    description="Conoce nuestra historia, misión y el equipo detrás de tus mejores eventos."
+>
+    <div class="min-h-screen bg-background pb-20">
+        <!-- Hero Section -->
+        <section class="relative bg-primary/5 py-20 md:py-32 overflow-hidden">
+            <div
+                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"
+            >
+            </div>
+            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                    Sobre <span class="text-primary">Nosotros</span>
+                </h1>
+                <p
+                    class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+                >
+                    Más que alquiler de equipos, somos tus aliados estratégicos
+                    para transformar cualquier espacio en el escenario perfecto.
+                </p>
+            </div>
+        </section>
+
+        <main class="max-w-6xl mx-auto px-4 -mt-12 relative z-20 space-y-24">
+            <!-- Misión / Visión / Valores Cards -->
+            <section class="grid md:grid-cols-3 gap-8">
+                {
+                    features.map((f) => (
+                        <div class="bg-card rounded-2xl border p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col items-center text-center group">
+                            <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                                {f.icon === "target" && (
+                                    <svg
+                                        class="w-8 h-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"
+                                        />
+                                    </svg>
+                                )}
+                                {f.icon === "eye" && (
+                                    <svg
+                                        class="w-8 h-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                        />
+                                    </svg>
+                                )}
+                                {f.icon === "heart" && (
+                                    <svg
+                                        class="w-8 h-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                        />
+                                    </svg>
+                                )}
+                            </div>
+                            <h3 class="font-bold text-2xl mb-4">{f.t}</h3>
+                            <p class="text-muted-foreground leading-relaxed">
+                                {f.d}
+                            </p>
+                        </div>
+                    ))
+                }
+            </section>
+
+            <!-- Nuestra Historia -->
+            <section class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium"
+                    >
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                        </svg>
+                        Nuestra Trayectoria
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold">
+                        Una historia de pasión por los detalles
+                    </h2>
+                    <div
+                        class="space-y-4 text-lg text-muted-foreground leading-relaxed"
+                    >
+                        <p>
+                            Nacimos con el propósito de elevar el estándar en la
+                            industria de eventos. Lo que comenzó como un pequeño
+                            emprendimiento familiar, hoy se ha convertido en una
+                            referencia de calidad y cumplimiento.
+                        </p>
+                        <p>
+                            Con años de experiencia en el sector, hemos
+                            aprendido que el éxito de un evento no solo depende
+                            de los equipos, sino de la tranquilidad que
+                            brindamos a nuestros clientes a través de un
+                            servicio puntual y profesional.
+                        </p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-3xl transform rotate-3"
+                    >
+                    </div>
+                    <img
+                        src="https://res.cloudinary.com/dpyrrgou3/image/upload/v1763588019/6e0f90130562d8_iporle.jpg"
+                        alt="Nuestra Historia"
+                        class="relative rounded-3xl shadow-2xl w-full object-cover aspect-video transform -rotate-3 transition-transform hover:rotate-0 duration-500"
+                    />
+                </div>
+            </section>
+
+            <!-- Equipo -->
+            <section class="text-center">
+                <div class="mb-12">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+                    >
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                            ></path>
+                        </svg>
+                        Talento Humano
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                        Conoce a nuestro equipo
+                    </h2>
+                    <p class="text-muted-foreground max-w-2xl mx-auto">
+                        Profesionales dedicados que trabajan incansablemente
+                        detrás de escena para asegurar que todo salga perfecto.
+                    </p>
+                </div>
+                <Team client:visible members={teamMembers} />
+            </section>
+        </main>
+    </div>
+</BaseLayout>
