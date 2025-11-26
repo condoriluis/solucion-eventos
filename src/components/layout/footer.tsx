@@ -1,24 +1,24 @@
 import { dataEmpresa } from "@/lib/constants/dataEmpresa";
-import { iconsWeb } from "./iconsWeb";
+import { IconsWeb } from "./IconsWeb";
 import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 
 export default function Footer() {
     const redes = dataEmpresa.redes.map((r) => {
         let url = r.url;
-        let icon = iconsWeb.facebook;
+        let icon = IconsWeb.facebook;
 
         switch (r.network.toLowerCase()) {
             case "facebook":
-                icon = iconsWeb.facebook;
+                icon = IconsWeb.facebook;
                 break;
 
             case "tiktok":
-                icon = iconsWeb.tiktok;
+                icon = IconsWeb.tiktok;
                 url = `https://www.tiktok.com/@${r.url.replace(/@/g, "")}`;
                 break;
 
             case "whatsapp":
-                icon = iconsWeb.whatsapp;
+                icon = IconsWeb.whatsapp;
                 url = `https://wa.me/${r.url.replace(/[^\d]/g, "")}`;
                 break;
         }
@@ -107,8 +107,7 @@ export default function Footer() {
                         </li>
                     </ul>
                 </div>
-
-                {/* Col 4: Legal / Extra */}
+                
                 <div>
                     <h3 className="font-semibold text-foreground mb-6">Horario de Atención</h3>
                     <div className="space-y-3 text-sm text-muted-foreground">

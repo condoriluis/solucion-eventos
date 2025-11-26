@@ -96,7 +96,6 @@ export default function Header() {
 
                     <ThemeToggle />
 
-                    {/* Mobile Menu */}
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menú">

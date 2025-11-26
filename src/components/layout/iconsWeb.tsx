@@ -1,6 +1,6 @@
 import { Facebook } from "lucide-react";
 
-export const iconsWeb = {
+export const IconsWeb = {
     facebook: <Facebook className="w-5 h-5" />,
     tiktok: (
         <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
