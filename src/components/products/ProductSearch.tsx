@@ -32,7 +32,6 @@ export default function ProductSearch({ products }: ProductSearchProps) {
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 200]);
     const [showFilters, setShowFilters] = useState(false);
 
-    // Calculate min and max prices from products
     const { minPrice, maxPrice } = useMemo(() => {
         const prices = products.map((p) => p.price);
         return {
@@ -41,15 +40,13 @@ export default function ProductSearch({ products }: ProductSearchProps) {
         };
     }, [products]);
 
-    // Initialize price range
     useEffect(() => {
         setPriceRange([minPrice, maxPrice]);
     }, [minPrice, maxPrice]);
 
-    // Filter products
     const filteredProducts = useMemo(() => {
         return products.filter((product) => {
-            // Search filter
+
             const matchesSearch =
                 searchTerm === "" ||
                 product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -58,11 +55,9 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                     f.toLowerCase().includes(searchTerm.toLowerCase())
                 );
 
-            // Category filter
             const matchesCategory =
                 selectedCategory === "all" || product.category === selectedCategory;
 
-            // Price filter
             const matchesPrice =
                 product.price >= priceRange[0] && product.price <= priceRange[1];
 
@@ -70,14 +65,12 @@ export default function ProductSearch({ products }: ProductSearchProps) {
         });
     }, [products, searchTerm, selectedCategory, priceRange]);
 
-    // Check if any filters are active
     const hasActiveFilters =
         searchTerm !== "" ||
         selectedCategory !== "all" ||
         priceRange[0] !== minPrice ||
         priceRange[1] !== maxPrice;
 
-    // Clear all filters
     const clearFilters = () => {
         setSearchTerm("");
         setSelectedCategory("all");
@@ -86,10 +79,10 @@ export default function ProductSearch({ products }: ProductSearchProps) {
 
     return (
         <div className="space-y-8">
-            {/* Search and Filter Bar */}
-            <div className="sticky top-20 z-10 bg-background/80 backdrop-blur-lg rounded-2xl border p-4 shadow-lg">
+
+            <div className="top-20 z-10 bg-background/80 backdrop-blur-lg rounded-2xl border p-4 shadow-lg">
                 <div className="flex flex-col lg:flex-row gap-4">
-                    {/* Search Input */}
+
                     <div className="flex-1 relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                         <input
@@ -109,7 +102,6 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                         )}
                     </div>
 
-                    {/* Filter Toggle (Mobile) */}
                     <button
                         onClick={() => setShowFilters(!showFilters)}
                         className="lg:hidden flex items-center gap-2 px-4 py-3 rounded-xl border bg-background/50 hover:bg-muted transition-colors"
@@ -124,12 +116,10 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                     </button>
                 </div>
 
-                {/* Filters Section */}
                 <div
                     className={`mt-4 space-y-4 transition-all duration-300 ${showFilters ? "block" : "hidden lg:block"
                         }`}
                 >
-                    {/* Category Filters */}
                     <div>
                         <label className="text-sm font-medium mb-2 block">
                             Categoría
@@ -150,7 +140,6 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                         </div>
                     </div>
 
-                    {/* Price Range Filter */}
                     <div>
                         <div className="flex items-center justify-between mb-2">
                             <label className="text-sm font-medium">Rango de Precio</label>

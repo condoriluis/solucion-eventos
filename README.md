@@ -1,6 +1,5 @@
 # Soluciones para Eventos - Astro Migration
-
-Migración de la aplicación de Next.js a Astro para mejor SEO y rendimiento.
+Aplicación con Astro para mejorar SEO y rendimiento.
 
 ## 🚀 Características
 

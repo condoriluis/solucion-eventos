@@ -1,0 +1,170 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const title = "Página No Encontrada - 404";
+const description = "Lo sentimos, la página que buscas no existe.";
+---
+
+<BaseLayout title={title} description={description}>
+    <main
+        class="min-h-screen flex items-center justify-center px-4 py-16 relative overflow-hidden"
+    >
+        <!-- Background decorative elements -->
+        <div class="absolute inset-0 -z-10 overflow-hidden">
+            <div
+                class="absolute top-1/4 -left-20 w-72 h-72 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl animate-pulse"
+            >
+            </div>
+            <div
+                class="absolute bottom-1/4 -right-20 w-96 h-96 bg-accent/5 dark:bg-accent/10 rounded-full blur-3xl animate-pulse"
+                style="animation-delay: 1s;"
+            >
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- 404 Number with floating animation -->
+            <div class="relative mb-8">
+                <h1
+                    class="text-[12rem] md:text-[16rem] lg:text-[20rem] font-black leading-none select-none animate-float"
+                >
+                    <span
+                        class="bg-gradient-to-br from-primary via-primary/80 to-primary/60 dark:from-primary dark:via-primary/90 dark:to-primary/70 bg-clip-text text-transparent drop-shadow-2xl"
+                    >
+                        404
+                    </span>
+                </h1>
+                <!-- Glow effect -->
+                <div
+                    class="absolute inset-0 -z-10 blur-3xl opacity-30 dark:opacity-50"
+                >
+                    <div
+                        class="text-[12rem] md:text-[16rem] lg:text-[20rem] font-black leading-none bg-gradient-to-br from-primary to-primary/40 bg-clip-text text-transparent"
+                    >
+                        404
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error message -->
+            <div class="space-y-4 mb-12">
+                <h2
+                    class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground"
+                >
+                    ¡Oops! Página no encontrada
+                </h2>
+                <p
+                    class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+                >
+                    Lo sentimos, la página que estás buscando no existe o ha
+                    sido movida. Pero no te preocupes, podemos ayudarte a
+                    encontrar lo que necesitas.
+                </p>
+            </div>
+
+            <!-- Action buttons -->
+            <div
+                class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            >
+                <a
+                    href="/"
+                    class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-primary-foreground bg-primary rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/50 min-w-[200px]"
+                >
+                    <span class="relative z-10 flex items-center gap-2">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition-transform group-hover:-translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                            ></path>
+                        </svg>
+                        Volver al Inicio
+                    </span>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary-foreground/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"
+                    >
+                    </div>
+                </a>
+
+                <a
+                    href="/productos"
+                    class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-foreground bg-secondary rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl border border-border min-w-[200px]"
+                >
+                    <span class="relative z-10 flex items-center gap-2">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 transition-transform group-hover:scale-110"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            ></path>
+                        </svg>
+                        Ver Productos
+                    </span>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-secondary/0 via-foreground/5 to-secondary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"
+                    >
+                    </div>
+                </a>
+            </div>
+
+            <!-- Helpful links -->
+            <div class="pt-8 border-t border-border/50 max-w-2xl mx-auto">
+                <p class="text-sm text-muted-foreground mb-4">
+                    ¿Necesitas ayuda? Prueba con estos enlaces:
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <a
+                        href="/productos"
+                        class="text-primary hover:underline hover:text-primary/80 transition-colors"
+                    >
+                        Catálogo de Productos
+                    </a>
+                    <span class="text-muted-foreground">•</span>
+                    <a
+                        href="/sobre-nosotros"
+                        class="text-primary hover:underline hover:text-primary/80 transition-colors"
+                    >
+                        Sobre Nosotros
+                    </a>
+                    <span class="text-muted-foreground">•</span>
+                    <a
+                        href="/contacto"
+                        class="text-primary hover:underline hover:text-primary/80 transition-colors"
+                    >
+                        Contacto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</BaseLayout>
+
+<style>
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+</style>
