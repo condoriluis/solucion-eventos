@@ -167,18 +167,6 @@ Astro es compatible con:
 3. **Framer Motion**: Versión 11 para compatibilidad con React 18
 4. **Legacy Peer Deps**: Necesario para resolver conflictos de dependencias
 
-## 🔄 Migración desde Next.js
-
-### Diferencias Principales
-
-| Next.js                    | Astro                             |
-| -------------------------- | --------------------------------- |
-| `pages/`                   | `src/pages/`                      |
-| `_app.tsx`                 | `src/layouts/BaseLayout.astro`    |
-| `useEffect` en componentes | `client:load` directive           |
-| API Routes                 | `src/pages/api/` (similar)        |
-| Image component            | `<img>` nativo o `@astrojs/image` |
-
 ### Componentes Interactivos
 
 En Astro, los componentes React necesitan la directiva `client:*`:
