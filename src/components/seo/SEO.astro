@@ -4,7 +4,7 @@ interface Props {
   description: string;
   image?: string;
   canonical?: string;
-  type?: 'website' | 'article';
+  type?: "website" | "article";
   keywords?: string[];
   structuredData?: object;
 }
@@ -12,42 +12,50 @@ interface Props {
 const {
   title,
   description,
-  image = '/og-image.jpg',
+  image = "/og-image.jpg",
   canonical,
-  type = 'website',
+  type = "website",
   keywords = [],
   structuredData,
 } = Astro.props;
 
-const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://solucion-eventos.vercel.app';
-const canonicalURL = canonical || new URL(Astro.url.pathname, siteUrl).toString();
-const imageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).toString();
+const siteUrl =
+  import.meta.env.PUBLIC_SITE_URL || "https://solucion-eventos.vercel.app";
+const canonicalURL =
+  canonical || new URL(Astro.url.pathname, siteUrl).toString();
+const imageUrl = image.startsWith("http")
+  ? image
+  : new URL(image, siteUrl).toString();
 ---
 
-<!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:locale" content="es_BO" />
-<meta property="og:site_name" content="Soluciones para Eventos - Carpas y Más" />
+<meta
+  property="og:site_name"
+  content="Soluciones para Eventos - Carpas y Más"
+/>
 
-<!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageUrl} />
 
-<!-- Structured Data (JSON-LD) -->
-{structuredData && (
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-)}
+{
+  structuredData && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
+  )
+}

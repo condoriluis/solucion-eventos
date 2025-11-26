@@ -2,6 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { products } from "@/data/products";
 import ProductGallery from "@/components/products/ProductGallery";
+import SocialShare from "@/components/products/SocialShare";
+import { dataEmpresa } from "@/lib/constants/dataEmpresa";
 
 export function getStaticPaths() {
     return products.map((product) => ({
@@ -12,7 +14,10 @@ export function getStaticPaths() {
 
 const { product } = Astro.props;
 
-// Find related products (same category, excluding current)
+const siteUrl = `https://${dataEmpresa.contact.url}`;
+const productUrl = new URL(`/productos/${product.slug}`, siteUrl).toString();
+const imageUrl = new URL(product.images[0], siteUrl).toString();
+
 const relatedProducts = products
     .filter(
         (x) =>
@@ -28,8 +33,34 @@ const relatedProducts = products
     description={product.description}
     keywords={[product.category, product.name, "alquiler", "eventos"]}
 >
+    <meta property="og:type" content="product" slot="head" />
+    <meta property="og:url" content={productUrl} slot="head" />
+    <meta property="og:title" content={product.name} slot="head" />
+    <meta property="og:description" content={product.description} slot="head" />
+    <meta property="og:image" content={imageUrl} slot="head" />
+    <meta property="og:image:width" content="1200" slot="head" />
+    <meta property="og:image:height" content="630" slot="head" />
+    <meta
+        property="product:price:amount"
+        content={product.price.toString()}
+        slot="head"
+    />
+    <meta property="product:price:currency" content="BOB" slot="head" />
+    <meta property="product:availability" content="in stock" slot="head" />
+
+    <meta name="twitter:card" content="summary_large_image" slot="head" />
+    <meta name="twitter:url" content={productUrl} slot="head" />
+    <meta name="twitter:title" content={product.name} slot="head" />
+    <meta
+        name="twitter:description"
+        content={product.description}
+        slot="head"
+    />
+    <meta name="twitter:image" content={imageUrl} slot="head" />
+
+    <link rel="canonical" href={productUrl} slot="head" />
+    <meta name="robots" content="index, follow" slot="head" />
     <div class="min-h-screen bg-background pb-20">
-        <!-- Breadcrumbs -->
         <div class="bg-muted/30 border-b">
             <div
                 class="max-w-7xl mx-auto px-4 py-4 flex items-center text-sm text-muted-foreground"
@@ -91,7 +122,6 @@ const relatedProducts = products
 
         <main class="max-w-7xl mx-auto px-4 py-10">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
-                <!-- Left Column: Gallery -->
                 <div class="space-y-4">
                     <ProductGallery
                         client:load
@@ -99,7 +129,6 @@ const relatedProducts = products
                         productName={product.name}
                     />
 
-                    <!-- Trust Badges -->
                     <div class="grid grid-cols-3 gap-4 pt-6 border-t">
                         <div
                             class="flex flex-col items-center text-center gap-2"
@@ -176,7 +205,6 @@ const relatedProducts = products
                     </div>
                 </div>
 
-                <!-- Right Column: Details -->
                 <div class="flex flex-col">
                     <div class="mb-6">
                         <span
@@ -294,11 +322,19 @@ const relatedProducts = products
                                 >
                             </a>
                         </div>
+
+                        <!-- Social Share Section -->
+                        <div class="pt-6 border-t">
+                            <SocialShare
+                                client:load
+                                url={productUrl}
+                                title={product.name}
+                                description={product.description}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Related Products Section -->
             {
                 relatedProducts.length > 0 && (
                     <div class="mt-24 border-t pt-16">
