@@ -18,7 +18,7 @@ Migración de la aplicación de Next.js a Astro para mejor SEO y rendimiento.
 
 ## 📋 Requisitos Previos
 
-- Node.js 18+ 
+- Node.js 18+
 - npm o pnpm
 
 ## 🛠️ Instalación
@@ -42,7 +42,7 @@ PUBLIC_GTM_ID=GTM-XXXXXXX
 PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 PUBLIC_FACEBOOK_PIXEL_ID=your-pixel-id-here
 PUBLIC_FACEBOOK_VERIFICATION_DOMAIN=your-verification-domain-here
-PUBLIC_SITE_URL=https://solucion-eventos.vercel.app
+PUBLIC_SITE_URL=your_site_url
 ```
 
 > **Nota**: Todas las variables que necesitan ser accesibles en el navegador deben tener el prefijo `PUBLIC_`.
@@ -92,11 +92,13 @@ astro-migration/
 ## 🎨 Componentes
 
 ### Componentes Astro (.astro)
+
 - Usados para contenido estático y SEO
 - Renderizados en el servidor
 - Ejemplos: SEO, GoogleTagManager, BaseLayout
 
 ### Componentes React (.tsx)
+
 - Usados para interactividad
 - Cargados como "islands" con `client:load`
 - Ejemplos: Header, Footer, HomeClient
@@ -104,15 +106,19 @@ astro-migration/
 ## 📊 SEO y Marketing
 
 ### Google Tag Manager
+
 Configurado en `src/components/seo/GoogleTagManager.astro`
 
 ### Google Analytics 4
+
 Configurado en `src/components/seo/GoogleAnalytics.astro`
 
 ### Facebook Pixel
+
 Configurado en `src/components/seo/FacebookPixel.astro`
 
 ### Structured Data
+
 Cada página incluye JSON-LD para mejor SEO
 
 ## 🎯 Verificación
@@ -148,6 +154,7 @@ Cada página incluye JSON-LD para mejor SEO
 ### Otras Plataformas
 
 Astro es compatible con:
+
 - Netlify
 - Cloudflare Pages
 - AWS Amplify
@@ -164,13 +171,13 @@ Astro es compatible con:
 
 ### Diferencias Principales
 
-| Next.js | Astro |
-|---------|-------|
-| `pages/` | `src/pages/` |
-| `_app.tsx` | `src/layouts/BaseLayout.astro` |
-| `useEffect` en componentes | `client:load` directive |
-| API Routes | `src/pages/api/` (similar) |
-| Image component | `<img>` nativo o `@astrojs/image` |
+| Next.js                    | Astro                             |
+| -------------------------- | --------------------------------- |
+| `pages/`                   | `src/pages/`                      |
+| `_app.tsx`                 | `src/layouts/BaseLayout.astro`    |
+| `useEffect` en componentes | `client:load` directive           |
+| API Routes                 | `src/pages/api/` (similar)        |
+| Image component            | `<img>` nativo o `@astrojs/image` |
 
 ### Componentes Interactivos
 
