@@ -52,9 +52,6 @@ export default function QuotePDF({ client, items, isReservation = false }: Props
                                 <IconText icon="email" text={dataEmpresa.contact.email} />
                             </Link>
 
-                            <Link src={`https://${dataEmpresa.contact.url.replace(/^https?:\/\//, '')}`} style={{ textDecoration: 'none' }}>
-                                <IconText icon="link" text={`https://${dataEmpresa.contact.url}`} />
-                            </Link>
                         </View>
                     </View>
 

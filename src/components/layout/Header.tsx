@@ -30,7 +30,7 @@ export default function Header() {
     return (
         <header
             className={cn(
-                "sticky top-0 z-50 w-full transition-all duration-300 border-b",
+                "sticky top-0 z-50 w-full transition-all duration-300 border-a",
                 scrolled
                     ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm py-2"
                     : "bg-background/50 backdrop-blur-sm py-4 border-transparent"

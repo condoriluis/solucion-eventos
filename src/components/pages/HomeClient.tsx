@@ -268,7 +268,7 @@ export default function HomeClient() {
                                         Solicitar Cotización Ahora
                                     </a>
                                 </Button>
-                                <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+                                <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-white/30 text-gray-700 hover:bg-white/10 hover:text-white" asChild>
                                     <a href="/contacto">
                                         Contáctanos
                                     </a>

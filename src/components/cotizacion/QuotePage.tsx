@@ -118,7 +118,7 @@ export default function QuotePage() {
     const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
 
     return (
-        <div className="min-h-screen bg-muted/30 pb-20">
+        <div className="min-h-screen bg-muted/10 pb-20">
             <div className="bg-background border-b">
                 <div className="max-w-6xl mx-auto px-4 py-8">
                     <h1 className="text-3xl font-bold">Generador de Cotizaciones</h1>
@@ -126,32 +126,32 @@ export default function QuotePage() {
                 </div>
             </div>
 
-            <main className="max-w-6xl mx-auto px-4 py-8">
-                <div className="grid lg:grid-cols-12 gap-8">
+            <main className="max-w-6xl mx-auto px-4 py-6 md:py-8">
+                <div className="grid lg:grid-cols-12 gap-6 md:gap-8">
 
                     {/* ------------------ Left Column: Product Selection ------------------ */}
                     <div className="lg:col-span-7 space-y-6">
                         <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
+                            <CardHeader className="pb-4">
+                                <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
                                     <ShoppingCart className="w-5 h-5 text-primary" />
                                     Agregar Productos
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                                <div className="grid sm:grid-cols-2 gap-4">
-                                    <div className="space-y-2 sm:col-span-2">
-                                        <Label>Producto</Label>
+                                <div className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label className="text-sm md:text-base">Producto</Label>
                                         <Select value={selectedId} onValueChange={setSelectedId}>
-                                            <SelectTrigger aria-label="Seleccionar producto">
+                                            <SelectTrigger aria-label="Seleccionar producto" className="h-11 md:h-10">
                                                 <SelectValue placeholder="Selecciona un producto..." />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {products.map((p) => (
                                                     <SelectItem key={p.id} value={p.id} disabled={p.stock === 0}>
                                                         <div className="flex justify-between w-full gap-4">
-                                                            <span>{p.name}</span>
-                                                            <span className="text-muted-foreground font-mono">{formatBs(p.price)}</span>
+                                                            <span className="truncate">{p.name}</span>
+                                                            <span className="text-muted-foreground font-mono shrink-0">{formatBs(p.price)}</span>
                                                         </div>
                                                     </SelectItem>
                                                 ))}
@@ -159,52 +159,57 @@ export default function QuotePage() {
                                         </Select>
                                     </div>
 
-                                    <div className="space-y-2">
-                                        <Label>Cantidad</Label>
-                                        <Input
-                                            type="number"
-                                            min={1}
-                                            max={selected?.stock ?? 1}
-                                            value={qty}
-                                            onChange={(e) => {
-                                                const value = parseInt(e.target.value);
-                                                if (!value || value < 1) setQty(1);
-                                                else if (value > (selected?.stock ?? 1)) setQty(selected?.stock ?? 1);
-                                                else setQty(value);
-                                            }}
-                                        />
-                                    </div>
+                                    <div className="grid grid-cols-2 gap-3 md:gap-4">
+                                        <div className="space-y-2">
+                                            <Label className="text-sm md:text-base">Cantidad</Label>
+                                            <Input
+                                                type="number"
+                                                min={1}
+                                                max={selected?.stock ?? 1}
+                                                value={qty}
+                                                onChange={(e) => {
+                                                    const value = parseInt(e.target.value);
+                                                    if (!value || value < 1) setQty(1);
+                                                    else if (value > (selected?.stock ?? 1)) setQty(selected?.stock ?? 1);
+                                                    else setQty(value);
+                                                }}
+                                                className="h-11 md:h-10"
+                                            />
+                                        </div>
 
-                                    <div className="flex items-end">
-                                        <Button onClick={addItem} className="w-full" disabled={!selected}>
-                                            <Plus className="w-4 h-4 mr-2" /> Agregar
-                                        </Button>
+                                        <div className="flex items-end">
+                                            <Button onClick={addItem} className="w-full h-11 md:h-10" disabled={!selected}>
+                                                <Plus className="w-4 h-4 mr-1 md:mr-2" />
+                                                <span className="hidden sm:inline">Agregar</span>
+                                                <span className="sm:hidden">Add</span>
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
 
                                 {selected && (
-                                    <div className="text-sm text-muted-foreground bg-muted p-3 rounded-md flex justify-between">
-                                        <span>Stock disponible: <strong>{selected.stock}</strong></span>
-                                        <span>Precio unitario: <strong>{formatBs(selected.price)}</strong></span>
+                                    <div className="text-xs md:text-sm text-muted-foreground bg-muted p-3 md:p-4 rounded-lg space-y-2 md:space-y-0 md:flex md:justify-between">
+                                        <span className="block md:inline">Stock disponible: <strong className="text-foreground">{selected.stock}</strong></span>
+                                        <span className="block md:inline">Precio unitario: <strong className="text-foreground">{formatBs(selected.price)}</strong></span>
                                     </div>
                                 )}
                             </CardContent>
                         </Card>
 
                         <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
+                            <CardHeader className="pb-2">
+                                <CardTitle className="flex items-center gap-2 text-lg md:text-xl">
                                     <User className="w-5 h-5 text-primary" />
                                     Datos del Cliente
                                 </CardTitle>
                             </CardHeader>
-                            <CardContent className="space-y-4">
+                            <CardContent className="space-y-3">
                                 <div className="space-y-2">
-                                    <Label>Nombre Completo <span className="text-destructive">*</span></Label>
+                                    <Label className="text-sm md:text-base">Nombre Completo <span className="text-destructive">*</span></Label>
                                     <div className="relative">
-                                        <User className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                                        <User className="absolute left-3 top-2.5 md:top-2 h-4 w-4 text-muted-foreground" />
                                         <Input
-                                            className="pl-9"
+                                            className="pl-9 h-11 md:h-10"
                                             placeholder="Ej. Juan Pérez"
                                             value={client.name}
                                             onChange={(e) => {
@@ -217,11 +222,11 @@ export default function QuotePage() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label>Teléfono <span className="text-destructive">*</span></Label>
+                                    <Label className="text-sm md:text-base">Teléfono <span className="text-destructive">*</span></Label>
                                     <div className="relative">
-                                        <Phone className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                                        <Phone className="absolute left-3 top-2.5 md:top-2 h-4 w-4 text-muted-foreground" />
                                         <Input
-                                            className="pl-9"
+                                            className="pl-9 h-11 md:h-10"
                                             placeholder="Ej. 77712345"
                                             value={client.phone}
                                             onChange={(e) => {
@@ -233,13 +238,13 @@ export default function QuotePage() {
                                     {phoneError && <p className="text-destructive text-xs">{phoneError}</p>}
                                 </div>
 
-                                <div className="grid sm:grid-cols-2 gap-4">
+                                <div className="space-y-4">
                                     <div className="space-y-2">
-                                        <Label>Cédula de Identidad <span className="text-destructive">*</span></Label>
+                                        <Label className="text-sm md:text-base">Cédula de Identidad <span className="text-destructive">*</span></Label>
                                         <div className="relative">
-                                            <CreditCard className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                                            <CreditCard className="absolute left-3 top-2.5 md:top-2 h-4 w-4 text-muted-foreground" />
                                             <Input
-                                                className="pl-9"
+                                                className="pl-9 h-11 md:h-10"
                                                 placeholder="Ej. 123456 LP"
                                                 value={client.ci}
                                                 onChange={(e) => {
@@ -252,11 +257,11 @@ export default function QuotePage() {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <Label>Correo Electrónico <span className="text-muted-foreground text-xs">(Opcional)</span></Label>
+                                        <Label className="text-sm md:text-base">Correo Electrónico <span className="text-muted-foreground text-xs">(Opcional)</span></Label>
                                         <div className="relative">
-                                            <Mail className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                                            <Mail className="absolute left-3 top-2.5 md:top-2 h-4 w-4 text-muted-foreground" />
                                             <Input
-                                                className="pl-9"
+                                                className="pl-9 h-11 md:h-10"
                                                 placeholder="Ej. juan@email.com"
                                                 value={client.email}
                                                 onChange={(e) => setClient({ ...client, email: e.target.value })}
@@ -271,29 +276,30 @@ export default function QuotePage() {
 
                     {/* ------------------ Right Column: Summary ------------------ */}
                     <div className="lg:col-span-5">
-                        <div className="sticky top-8">
+                        <div className="lg:sticky lg:top-8">
                             <Card className="shadow-lg border-primary/20 overflow-hidden">
-                                <div className="bg-primary/5 p-6 border-b border-primary/10">
-                                    <h2 className="text-xl font-bold text-primary">Resumen de Cotización</h2>
-                                    <p className="text-sm text-muted-foreground">Revisa los ítems antes de descargar.</p>
+                                <div className="bg-primary/5 p-4 md:p-6 border-b border-primary/10">
+                                    <h2 className="text-lg md:text-xl font-bold text-primary">Resumen de Cotización</h2>
+                                    <p className="text-xs md:text-sm text-muted-foreground mt-1">Revisa los ítems antes de descargar.</p>
                                 </div>
 
                                 <CardContent className="p-0">
                                     {items.length > 0 ? (
-                                        <div className="divide-y max-h-[400px] overflow-y-auto">
+                                        <div className="divide-y max-h-[300px] md:max-h-[400px] overflow-y-auto">
                                             {items.map((i) => (
-                                                <div key={i.id} className="p-4 flex items-center justify-between hover:bg-muted/50 transition-colors">
-                                                    <div className="flex-1 min-w-0 mr-4">
-                                                        <p className="font-medium truncate">{i.name}</p>
-                                                        <p className="text-sm text-muted-foreground">
+                                                <div key={i.id} className="p-3 md:p-4 flex items-start md:items-center gap-3 hover:bg-muted/50 transition-colors">
+                                                    <div className="flex-1 min-w-0">
+                                                        <p className="font-medium text-sm md:text-base line-clamp-2 md:truncate">{i.name}</p>
+                                                        <p className="text-xs md:text-sm text-muted-foreground mt-0.5">
                                                             {i.qty} x {formatBs(i.price)}
                                                         </p>
                                                     </div>
-                                                    <div className="flex items-center gap-4">
-                                                        <span className="font-semibold">{formatBs(i.price * i.qty)}</span>
+                                                    <div className="flex items-center gap-2 md:gap-4 shrink-0">
+                                                        <span className="font-semibold text-sm md:text-base">{formatBs(i.price * i.qty)}</span>
                                                         <button
                                                             onClick={() => removeItem(i.id)}
-                                                            className="text-muted-foreground hover:text-destructive transition-colors p-1 hover:bg-destructive/10 rounded"
+                                                            className="text-muted-foreground hover:text-destructive transition-colors p-2 hover:bg-destructive/10 rounded"
+                                                            aria-label="Eliminar producto"
                                                         >
                                                             <Trash className="w-4 h-4" />
                                                         </button>
@@ -302,37 +308,40 @@ export default function QuotePage() {
                                             ))}
                                         </div>
                                     ) : (
-                                        <div className="p-8 text-center text-muted-foreground border-dashed border-2 m-4 rounded-lg bg-muted/30">
+                                        <div className="p-6 md:p-8 text-center text-muted-foreground border-dashed border-2 m-3 md:m-4 rounded-lg bg-muted/30">
                                             <ShoppingCart className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                                            <p>Tu carrito está vacío</p>
+                                            <p className="text-sm md:text-base">Tu carrito está vacío</p>
                                         </div>
                                     )}
                                 </CardContent>
 
-                                <CardFooter className="flex flex-col gap-4 bg-muted/30 p-6 border-t">
-                                    <div className="flex justify-between w-full text-lg font-bold">
+                                <CardFooter className="flex flex-col gap-3 md:gap-4 bg-muted/30 p-4 md:p-6 border-t">
+                                    <div className="flex justify-between w-full text-base md:text-lg font-bold">
                                         <span>Total Estimado</span>
-                                        <span>{formatBs(total)}</span>
+                                        <span className="text-primary">{formatBs(total)}</span>
                                     </div>
 
                                     <Button
                                         onClick={handleWhatsApp}
-                                        className="w-full h-12 text-lg bg-green-600 hover:bg-green-700 text-white"
+                                        className="w-full h-12 md:h-12 text-sm md:text-base bg-green-600 hover:bg-green-700 text-white"
                                         size="lg"
                                         disabled={items.length === 0}
                                     >
-                                        <Phone className="w-5 h-5 mr-2" /> Enviar Cotización por WhatsApp
+                                        <Phone className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                                        <span className="hidden sm:inline">Enviar Cotización por WhatsApp</span>
+                                        <span className="sm:hidden">Enviar por WhatsApp</span>
                                     </Button>
 
-                                    <div className="flex items-center space-x-2 py-2">
+                                    <div className="flex items-start space-x-2 py-2">
                                         <Checkbox
                                             id="reservation"
                                             checked={isReservation}
                                             onCheckedChange={(checked) => setIsReservation(checked as boolean)}
+                                            className="mt-0.5"
                                         />
                                         <label
                                             htmlFor="reservation"
-                                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                            className="text-xs md:text-sm font-medium leading-tight cursor-pointer"
                                         >
                                             Generar como Reserva Confirmada
                                         </label>
@@ -344,24 +353,28 @@ export default function QuotePage() {
                                             fileName={`${isReservation ? 'reserva' : 'cotizacion'}_${client.name.trim().replace(/\s+/g, "_") || 'cliente'}_${client.phone}.pdf`}
                                             className="w-full"
                                         >
-                                            <Button className="w-full h-12 text-lg shadow-md" size="lg" variant="outline">
-                                                <FileDown className="w-5 h-5 mr-2" /> Descargar PDF Oficial
+                                            <Button className="w-full h-12 md:h-12 text-sm md:text-base shadow-md" size="lg" variant="outline">
+                                                <FileDown className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                                                <span className="hidden sm:inline">Descargar PDF Oficial</span>
+                                                <span className="sm:hidden">Descargar PDF</span>
                                             </Button>
                                         </PDFDownloadLink>
                                     ) : (
                                         <Button
-                                            className="w-full h-12 text-lg"
+                                            className="w-full h-12 md:h-12 text-sm md:text-base"
                                             size="lg"
                                             disabled
                                             variant="secondary"
                                         >
-                                            <FileDown className="w-5 h-5 mr-2" /> Descargar PDF Oficial
+                                            <FileDown className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                                            <span className="hidden sm:inline">Descargar PDF Oficial</span>
+                                            <span className="sm:hidden">Descargar PDF</span>
                                         </Button>
                                     )}
 
                                     {!validClient && items.length > 0 && (
-                                        <p className="text-xs text-center text-muted-foreground">
-                                            Completa los datos del cliente (Nombre, CI y Teléfono) para descargar el PDF.
+                                        <p className="text-xs text-center text-muted-foreground leading-relaxed">
+                                            Completa los datos del cliente (Nombre, Teléfono y CI) para descargar el PDF.
                                         </p>
                                     )}
                                 </CardFooter>

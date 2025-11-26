@@ -180,50 +180,66 @@ const relatedProducts = products
                 <div class="flex flex-col">
                     <div class="mb-6">
                         <span
-                            class="inline-block mb-4 text-sm px-3 py-1 capitalize bg-secondary text-secondary-foreground rounded-md"
+                            class="inline-block mb-4 text-sm font-medium px-4 py-1.5 capitalize bg-primary/10 text-primary rounded-full"
                         >
                             {product.category}
                         </span>
                         <h1
-                            class="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight"
+                            class="text-3xl md:text-5xl font-bold text-foreground mb-6 leading-tight"
                         >
                             {product.name}
                         </h1>
-                        <div class="flex items-baseline gap-2 mb-6">
-                            <span class="text-3xl font-bold text-primary"
-                                >Bs. {product.price}</span
-                            >
-                            <span class="text-muted-foreground">/ día</span>
+                        <div
+                            class="flex items-baseline gap-3 mb-6 p-6 bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl border border-primary/20"
+                        >
+                            <div class="flex flex-col">
+                                <span class="text-sm text-muted-foreground mb-1"
+                                    >Precio por día</span
+                                >
+                                <div class="flex items-baseline gap-2">
+                                    <span
+                                        class="text-4xl md:text-5xl font-bold text-primary"
+                                        >Bs. {product.price}</span
+                                    >
+                                    <span class="text-lg text-muted-foreground"
+                                        >/ día</span
+                                    >
+                                </div>
+                            </div>
                         </div>
                         <p
-                            class="text-lg text-muted-foreground leading-relaxed"
+                            class="text-base md:text-lg text-muted-foreground leading-relaxed"
                         >
                             {product.description}
                         </p>
                     </div>
 
-                    <div class="space-y-6 mb-8">
-                        <h3 class="font-semibold text-foreground">
+                    <div class="space-y-4 mb-8">
+                        <h3 class="text-lg font-bold text-foreground">
                             Características:
                         </h3>
-                        <ul class="grid sm:grid-cols-2 gap-3">
+                        <ul class="grid sm:grid-cols-2 gap-4">
                             {
                                 product.features?.map((f) => (
-                                    <li class="flex items-start gap-2 text-sm text-muted-foreground">
-                                        <svg
-                                            class="w-4 h-4 text-primary mt-0.5 shrink-0"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                        <span>{f}</span>
+                                    <li class="flex items-start gap-3 p-3 rounded-xl bg-muted/30 border border-muted">
+                                        <div class="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                                            <svg
+                                                class="w-3 h-3 text-primary"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2.5"
+                                                    d="M5 13l4 4L19 7"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <span class="text-sm md:text-base text-foreground font-medium">
+                                            {f}
+                                        </span>
                                     </li>
                                 ))
                             }
@@ -231,27 +247,51 @@ const relatedProducts = products
                     </div>
 
                     <div
-                        class="mt-auto space-y-4 p-6 bg-muted/30 rounded-2xl border"
+                        class="mt-auto space-y-6 p-6 md:p-8 bg-gradient-to-br from-muted/50 to-muted/30 rounded-2xl border-2 border-muted shadow-lg"
                     >
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-muted-foreground"
-                                >Disponibilidad:</span
+                        <div
+                            class="flex items-center justify-between p-4 bg-background/50 rounded-xl border"
+                        >
+                            <span
+                                class="text-sm md:text-base font-medium text-muted-foreground"
+                                >Disponibilidad</span
                             >
                             <span
-                                class="font-medium text-green-600 flex items-center gap-1"
+                                class="font-bold text-green-600 flex items-center gap-2 text-sm md:text-base"
                             >
-                                <div class="w-2 h-2 rounded-full bg-green-600">
+                                <div
+                                    class="w-3 h-3 rounded-full bg-green-600 animate-pulse"
+                                >
                                 </div>
-                                {product.stock} unidades disponibles
+                                {product.stock} unidades
                             </span>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <div class="space-y-3">
                             <a
                                 href="/cotizacion"
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-12 px-8 flex-1 text-lg"
+                                class="group relative inline-flex items-center justify-center gap-3 w-full rounded-xl text-base md:text-lg font-bold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] h-14 md:h-16 px-8 overflow-hidden"
                             >
-                                Solicitar Cotización
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"
+                                >
+                                </div>
+                                <svg
+                                    class="w-5 h-5 md:w-6 md:h-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                    ></path>
+                                </svg>
+                                <span class="relative z-10"
+                                    >Solicitar Cotización</span
+                                >
                             </a>
                         </div>
                     </div>
