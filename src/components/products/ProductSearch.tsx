@@ -274,9 +274,13 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                                 alt={product.name}
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />
-                            {product.stock < 5 && (
+                            {product.stock < 5 ? (
                                 <div className="absolute top-3 right-3 bg-destructive text-destructive-foreground text-xs px-3 py-1 rounded-full font-medium">
                                     Stock bajo
+                                </div>
+                            ) : (
+                                <div className="absolute top-3 right-3 bg-green-500 text-green-foreground text-xs px-3 py-1 rounded-full font-medium">
+                                    Stock disponible
                                 </div>
                             )}
                         </div>
