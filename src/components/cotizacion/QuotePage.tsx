@@ -128,13 +128,17 @@ export default function QuotePage() {
     }
 
     return (
-        <div className="min-h-screen bg-muted/10 pb-20">
-            <div className="bg-background border-b">
-                <div className="max-w-6xl mx-auto px-4 py-8">
-                    <h1 className="text-3xl font-bold">Generador de Cotizaciones</h1>
-                    <p className="text-muted-foreground mt-1">Crea y descarga tu cotización en segundos.</p>
+        <div className="min-h-screen bg-background pb-20">
+            <section className="relative py-12 overflow-hidden">
+                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+                        Generador de Cotizaciones
+                    </h1>
+                    <p className="text-lg text-muted-foreground">
+                        Crea y descarga tu cotización en segundos.
+                    </p>
                 </div>
-            </div>
+            </section>
 
             <main className="max-w-6xl mx-auto px-4 py-6 md:py-8">
                 <div className="grid lg:grid-cols-12 gap-6 md:gap-8">

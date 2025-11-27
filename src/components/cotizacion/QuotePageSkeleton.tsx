@@ -3,14 +3,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function QuotePageSkeleton() {
     return (
-        <div className="min-h-screen bg-muted/10 pb-20">
+        <div className="min-h-screen bg-background pb-20">
             {/* Header Skeleton */}
-            <div className="bg-background border-b">
-                <div className="max-w-6xl mx-auto px-4 py-8">
+            <section className="relative py-12 overflow-hidden">
+                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
                     <Skeleton className="h-9 w-80 mb-2" />
                     <Skeleton className="h-5 w-96" />
                 </div>
-            </div>
+            </section>
 
             <main className="max-w-6xl mx-auto px-4 py-6 md:py-8">
                 <div className="grid lg:grid-cols-12 gap-6 md:gap-8">
