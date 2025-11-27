@@ -1,8 +1,9 @@
 ---
+const { type = 'head' } = Astro.props;
 const gtmId = import.meta.env.PUBLIC_GTM_ID;
 ---
 
-{gtmId && (
+{gtmId && type === 'head' && (
   <>
     <!-- Google Tag Manager -->
     <script is:inline define:vars={{ gtmId }}>
@@ -16,8 +17,7 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
   </>
 )}
 
-<!-- Google Tag Manager (noscript) -->
-{gtmId && (
+{gtmId && type === 'body' && (
   <noscript>
     <iframe 
       src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
@@ -27,4 +27,3 @@ const gtmId = import.meta.env.PUBLIC_GTM_ID;
     ></iframe>
   </noscript>
 )}
-<!-- End Google Tag Manager (noscript) -->

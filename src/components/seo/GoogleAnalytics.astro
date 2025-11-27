@@ -4,16 +4,17 @@ const ga4Id = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID;
 
 {ga4Id && (
   <>
-    <!-- Google Analytics 4 -->
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
     <script is:inline define:vars={{ ga4Id }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', ga4Id, {
-        page_path: window.location.pathname,
+
+      document.addEventListener('astro:page-load', () => {
+        gtag('config', ga4Id, {
+          page_path: window.location.pathname,
+        });
       });
     </script>
-    <!-- End Google Analytics 4 -->
   </>
 )}

@@ -61,8 +61,8 @@ const fullTitle =
       rel="stylesheet"
     />
 
-    <GoogleTagManager />
     <GoogleAnalytics />
+    <GoogleTagManager type="head" />
     <FacebookPixel />
 
     <ViewTransitions />
@@ -96,7 +96,7 @@ const fullTitle =
     </script>
   </head>
   <body class="antialiased">
-    <GoogleTagManager />
+    <GoogleTagManager type="body" />
     <Header client:load />
     <Toaster client:load transition:persist />
     <ScrollToTop client:load />

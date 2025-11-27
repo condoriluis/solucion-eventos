@@ -37,7 +37,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
 
     return (
         <div className="flex items-center justify-center gap-2 flex-wrap">
-            {/* First Page Button */}
+
             <button
                 onClick={() => onPageChange(1)}
                 disabled={currentPage === 1}
@@ -47,7 +47,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 <ChevronsLeft className="w-5 h-5" />
             </button>
 
-            {/* Previous Button */}
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
@@ -57,11 +56,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 <ChevronLeft className="w-5 h-5" />
             </button>
 
-            {/* Page Numbers */}
             <div className="flex items-center gap-1">
                 {pageNumbers.map((page, index) => {
                     if (typeof page === "string") {
-                        // Ellipsis
+
                         return (
                             <span
                                 key={`${page}-${index}`}
@@ -89,7 +87,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 })}
             </div>
 
-            {/* Next Button */}
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
@@ -99,7 +96,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
                 <ChevronRight className="w-5 h-5" />
             </button>
 
-            {/* Last Page Button */}
             <button
                 onClick={() => onPageChange(totalPages)}
                 disabled={currentPage === totalPages}

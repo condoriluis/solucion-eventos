@@ -9,7 +9,6 @@ const verificationDomain = import.meta.env.PUBLIC_FACEBOOK_VERIFICATION_DOMAIN;
 
 {pixelId && (
   <>
-    <!-- Facebook Pixel Code -->
     <script is:inline define:vars={{ pixelId }}>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -20,7 +19,10 @@ const verificationDomain = import.meta.env.PUBLIC_FACEBOOK_VERIFICATION_DOMAIN;
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', pixelId);
-      fbq('track', 'PageView');
+      
+      document.addEventListener('astro:page-load', () => {
+        fbq('track', 'PageView');
+      });
     </script>
     <noscript>
       <img 
@@ -28,9 +30,7 @@ const verificationDomain = import.meta.env.PUBLIC_FACEBOOK_VERIFICATION_DOMAIN;
         width="1" 
         style="display:none"
         src={`https://www.facebook.com/tr?id=${pixelId}&ev=PageView&noscript=1`}
-        alt=""
       />
     </noscript>
-    <!-- End Facebook Pixel Code -->
   </>
 )}
