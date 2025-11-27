@@ -9,6 +9,7 @@ import Footer from "@/components/layout/Footer.tsx";
 import { dataEmpresa } from "@/lib/constants/dataEmpresa";
 import { ViewTransitions } from "astro:transitions";
 import { Toaster } from "@/components/ui/sonner";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 interface Props {
   title?: string;
@@ -98,6 +99,7 @@ const fullTitle =
     <GoogleTagManager />
     <Header client:load />
     <Toaster client:load transition:persist />
+    <ScrollToTop client:load />
     <slot />
     <Footer />
   </body>

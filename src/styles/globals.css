@@ -76,7 +76,7 @@ body {
 }
 
 .animate-scroll-slow {
-  animation: scroll-slow 40s linear infinite;
+  animation: scroll-slow 12s linear infinite;
 }
 
 .pause {

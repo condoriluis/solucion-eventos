@@ -224,11 +224,11 @@ export default function HomeClient() {
                     <p className="text-muted-foreground">La satisfacción de nuestros clientes es nuestra mejor carta de presentación.</p>
                 </div>
 
-                <div className="flex gap-6 animate-scroll-slow hover:pause">
+                <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory md:overflow-visible md:animate-scroll-slow hover:pause pb-4 md:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                     {[...testimonials, ...testimonials].map((t, i) => (
                         <div
                             key={i}
-                            className="min-w-[350px] md:min-w-[400px] p-8 rounded-3xl bg-muted/30 border hover:border-primary/50 transition-colors"
+                            className="min-w-[85vw] sm:min-w-[350px] md:min-w-[400px] snap-center p-8 rounded-3xl bg-muted/30 border hover:border-primary/50 transition-colors"
                         >
                             <div className="flex gap-1 mb-4">
                                 {[1, 2, 3, 4, 5].map((star) => (
