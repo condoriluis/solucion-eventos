@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search, X, SlidersHorizontal } from "lucide-react";
+import Pagination from "@/components/ui/Pagination";
 
 interface Product {
     id: string;
@@ -31,6 +32,9 @@ export default function ProductSearch({ products }: ProductSearchProps) {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 200]);
     const [showFilters, setShowFilters] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const ITEMS_PER_PAGE = 8;
 
     const { minPrice, maxPrice } = useMemo(() => {
         const prices = products.map((p) => p.price);
@@ -65,6 +69,17 @@ export default function ProductSearch({ products }: ProductSearchProps) {
         });
     }, [products, searchTerm, selectedCategory, priceRange]);
 
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, selectedCategory, priceRange]);
+
+    // Calculate pagination
+    const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+
     const hasActiveFilters =
         searchTerm !== "" ||
         selectedCategory !== "all" ||
@@ -80,7 +95,7 @@ export default function ProductSearch({ products }: ProductSearchProps) {
     return (
         <div className="space-y-8">
 
-            <div className="top-20 z-10 bg-background/80 backdrop-blur-lg rounded-2xl border p-4 shadow-lg">
+            <div className="sticky top-20 z-10 bg-background/80 backdrop-blur-lg rounded-2xl border p-4 shadow-lg">
                 <div className="flex flex-col lg:flex-row gap-4">
 
                     <div className="flex-1 relative">
@@ -230,6 +245,10 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                         <>
                             Mostrando{" "}
                             <span className="font-bold text-foreground">
+                                {startIndex + 1}-{Math.min(endIndex, filteredProducts.length)}
+                            </span>{" "}
+                            de{" "}
+                            <span className="font-bold text-foreground">
                                 {filteredProducts.length}
                             </span>{" "}
                             {filteredProducts.length === 1 ? "producto" : "productos"}
@@ -240,9 +259,9 @@ export default function ProductSearch({ products }: ProductSearchProps) {
 
             {/* Product Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {filteredProducts.map((product, index) => (
+                {paginatedProducts.map((product, index) => (
                     <a
-                        key={product.id}
+                        key={`${product.id}-${index}`}
                         href={`/productos/${product.slug}`}
                         className="group rounded-2xl overflow-hidden border bg-card hover:shadow-xl transition-all duration-300 animate-fade-in"
                         style={{
@@ -303,6 +322,17 @@ export default function ProductSearch({ products }: ProductSearchProps) {
                     </a>
                 ))}
             </div>
+
+            {/* Pagination */}
+            {filteredProducts.length > 0 && (
+                <div className="mt-12">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={setCurrentPage}
+                    />
+                </div>
+            )}
 
             {/* No Results Message */}
             {filteredProducts.length === 0 && (

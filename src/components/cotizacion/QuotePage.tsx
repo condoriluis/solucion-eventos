@@ -1,6 +1,7 @@
 import { products } from "@/data/products";
 import { useMemo, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import QuotePageSkeleton from "@/components/cotizacion/QuotePageSkeleton";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -31,9 +32,15 @@ export default function QuotePage() {
     const [items, setItems] = useState<{ id: string; name: string; qty: number; price: number }[]>([]);
     const [isReservation, setIsReservation] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         setIsMounted(true);
+        // Simulate loading delay for better UX
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 500);
+        return () => clearTimeout(timer);
     }, []);
 
     const toTitleCase = (text: string) =>
@@ -63,7 +70,6 @@ export default function QuotePage() {
 
     const selected = useMemo(() => products.find((p) => p.id === selectedId), [selectedId]);
 
-    // Función para agregar producto con validación de stock
     const addItem = () => {
         if (!selected) return;
 
@@ -116,6 +122,10 @@ export default function QuotePage() {
     const validClient = clientSchema.safeParse(client).success;
     const canDownload = validClient && items.length > 0;
     const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+    if (loading) {
+        return <QuotePageSkeleton />;
+    }
 
     return (
         <div className="min-h-screen bg-muted/10 pb-20">
